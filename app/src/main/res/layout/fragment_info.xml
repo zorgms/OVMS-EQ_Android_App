@@ -150,13 +150,14 @@
 			android:layout_x="110px"
 			android:layout_y="450px"
 			android:gravity="center"
-			android:textColor="#a75d00"
-			android:textSize="70px"
+			android:text="95%"
+			android:textColor="#F6FCFF"
+			android:textSize="85px"
 			android:textStyle="bold"
 			android:shadowColor="#000000"
-			android:shadowDx="4"
-			android:shadowDy="4"
-			android:shadowRadius="6" />
+			android:shadowDx="6"
+			android:shadowDy="6"
+			android:shadowRadius="12" />
 
 		<TextView
 			android:id="@+id/tabInfoTextSOC_or"
@@ -167,12 +168,13 @@
 			android:gravity="center"
 			android:text="95%"
 			android:textColor="#c27700"
-			android:textSize="70px"
+			android:textSize="85px"
 			android:textStyle="bold"
 			android:shadowColor="#000000"
-			android:shadowDx="2"
-			android:shadowDy="2"
-			android:shadowRadius="3"/>
+			android:shadowDx="6"
+			android:shadowDy="6"
+			android:shadowRadius="12"
+			android:visibility="invisible"/>
 
 		<TextView
 			android:id="@+id/tabInfoTextChargeMode"

@@ -10,10 +10,10 @@ repositories {
 
 android {
     namespace 'com.openvehicles.OVMS'
-    compileSdk 33
+    compileSdk 34
     defaultConfig {
         applicationId "com.openvehicles.OVMS"
-        minSdk 19
+        minSdk 21
         targetSdkVersion 33
     }
     buildTypes {
@@ -29,6 +29,9 @@ android {
             minifyEnabled false
             multiDexEnabled true
         }
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     productFlavors {
     }

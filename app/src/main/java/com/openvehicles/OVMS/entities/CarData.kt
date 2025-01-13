@@ -445,8 +445,7 @@ class CarData : Serializable {
             car_temp_motor = String.format("%.1f\u00B0F", car_temp_motor_raw * (9.0 / 5.0) + 32.0)
             car_temp_battery =
                 String.format("%.1f\u00B0F", car_temp_battery_raw * (9.0 / 5.0) + 32.0)
-            car_temp_ambient =
-                String.format("%.1f\u00B0F", car_temp_ambient_raw * (9.0 / 5.0) + 32.0)
+            car_temp_ambient = if(car_temp_ambient_raw > 70.0f) car_temp_battery else String.format("%.1f\u00B0F", car_temp_ambient_raw * (9.0 / 5.0) + 32.0)
             car_temp_charger =
                 String.format("%.1f\u00B0F", car_temp_charger_raw * (9.0 / 5.0) + 32.0)
             car_temp_cabin = String.format("%.1f\u00B0F", car_temp_cabin_raw * (9.0 / 5.0) + 32.0)

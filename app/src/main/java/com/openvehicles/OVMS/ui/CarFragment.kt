@@ -106,7 +106,7 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                 eqBoxes.setImageResource(R.drawable.motortemp_letterbox_2)
 
                 findViewById(R.id.btn_valet_mode).visibility = View.INVISIBLE
-                findViewById(R.id.btn_lock_car).visibility = View.INVISIBLE
+                //findViewById(R.id.btn_lock_car).visibility = View.INVISIBLE
                 //findViewById(R.id.tabCarImageCarLocked).visibility = View.INVISIBLE
                 //findViewById(R.id.tabCarImageCarValetMode).visibility = View.INVISIBLE
 
@@ -118,8 +118,8 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
 
                 // TODO: No TPMS, only two wheels, etc.
                 findViewById(R.id.btn_valet_mode).visibility = View.INVISIBLE
-                findViewById(R.id.btn_lock_car).visibility = View.INVISIBLE
-                findViewById(R.id.tabCarImageCarLocked).visibility = View.INVISIBLE
+                //findViewById(R.id.btn_lock_car).visibility = View.INVISIBLE
+                //findViewById(R.id.tabCarImageCarLocked).visibility = View.INVISIBLE
                 findViewById(R.id.tabCarImageCarValetMode).visibility = View.INVISIBLE
                 findViewById(R.id.tabCarImageCarTPMSBoxes).visibility = View.INVISIBLE
                 findViewById(R.id.tabCarImageCarLeftDoorOpen).visibility = View.INVISIBLE
@@ -1879,7 +1879,9 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
             "SQ" -> {
                 // Switch on/off Smart EQ 453
                 iv = findViewById(R.id.tabCarImageCarLocked) as ImageView
-                iv.setImageResource(if (carData.car_started) R.drawable.smart_on_l else R.drawable.smart_off_l)
+                iv.setImageResource(if (carData.car_locked) R.drawable.carlock_clean else R.drawable.carunlock_clean)
+                iv.translationY = "10".toFloat()
+                iv.translationX = "25".toFloat()
             }
             else -> {
                 // Lock status default
