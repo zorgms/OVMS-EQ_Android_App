@@ -174,11 +174,36 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
 
         val booster_ac_btn = rootView.findViewById<View>(R.id.tabCarImageAC)
         booster_ac_btn.setOnClickListener {
-            AlertDialog.Builder(requireActivity())
-                .setTitle(R.string.lb_booster)
-                .setNegativeButton(R.string.Cancel, null)
-                .setPositiveButton(R.string.lb_booster_activate) { _, _ -> sendCommand(R.string.lb_booster, "26,1", this@InfoFragment ) }
-                .show()
+            if (carData!!.car_type== "SQ") {
+                var options = arrayOf("A/C on", "2x Booster", "3x Booster")
+                var checkedItem = 0 // To store the index of the selected item
+                AlertDialog.Builder(requireActivity())
+                    .setTitle(R.string.lb_booster)
+                    .setSingleChoiceItems(options, checkedItem) { _, which ->
+                        checkedItem = which // Update the selected item index
+                    }
+                    .setNegativeButton(R.string.Close, null)
+                    .setPositiveButton(R.string.lb_booster_activate) { _, _ ->
+                        when (checkedItem) {
+                            0 -> sendCommand(R.string.lb_booster, "26,1", this@InfoFragment)
+                            1 -> sendCommand(R.string.lb_booster, "24,1", this@InfoFragment)
+                            2 -> sendCommand(R.string.lb_booster, "24,2", this@InfoFragment)
+                        }
+                    }
+                    .show()
+            }else {
+                AlertDialog.Builder(requireActivity())
+                    .setTitle(R.string.lb_booster)
+                    .setNegativeButton(R.string.Cancel, null)
+                    .setPositiveButton(R.string.lb_booster_activate) { _, _ ->
+                        sendCommand(
+                            R.string.lb_booster,
+                            "26,1",
+                            this@InfoFragment
+                        )
+                    }
+                    .show()
+            }
         }
 
         // init ScaleLayout:
