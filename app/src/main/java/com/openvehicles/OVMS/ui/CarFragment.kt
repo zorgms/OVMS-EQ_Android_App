@@ -550,11 +550,15 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                 } else {
                     menu.add(0, MI_HL_01, 0, "1")
                 }
-                // not needed/working btn for SmartEQ
+
                 if (carData!!.car_type != "SQ") {
                     menu.add(0, MI_HL_02, 0, "2")
                     menu.add(0, MI_HL_03, 0, "3")
+                } else {
+                    menu.add(0, MI_HL_02, 0, "2x Booster")
+                    menu.add(0, MI_HL_03, 0, "3x Booster")
                 }
+
                 if (appPrefs.getData("plugin_2_$app_Car_ID") == "on") {
                     menu.add(0, MI_HL_BTR, 0, R.string.lb_booster_ctrl_reset)
                 }
@@ -648,8 +652,8 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                 true
             }
             MI_HL_FW -> {
-                var options = arrayOf("Edge - nightly Developer", "Eap - stable Developer", "Main - @PlayStore")
-                var checkedItem = -1 // To store the index of the selected item
+                var options = arrayOf("Edge - nightly Developer", "Eap - stable Developer", "Main - @PlayStore", "Developer - Dimitrie78", "force auto update")
+                var checkedItem = 4 // To store the index of the selected item
                 AlertDialog.Builder(requireActivity())
                     .setTitle(R.string.lb_plugin_firmware)
                     .setSingleChoiceItems(options, checkedItem) { _, which ->
@@ -661,6 +665,8 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                             0 -> sendCommand(R.string.lb_firmware_update, "7,ota flash http ovms.dexters-web.de/firmware/ota/v3.3/edge/ovms3.bin", this)
                             1 -> sendCommand(R.string.lb_firmware_update, "7,ota flash http ovms.dexters-web.de/firmware/ota/v3.3/eap/ovms3.bin", this)
                             2 -> sendCommand(R.string.lb_firmware_update, "7,ota flash http ovms.dexters-web.de/firmware/ota/v3.3/main/ovms3.bin", this)
+                            3 -> sendCommand(R.string.lb_firmware_update, "7,ota flash http ovms.dimitrie.eu/firmware/ota/v3.3/smarteq/ovms3.bin", this)
+                            4 -> sendCommand(R.string.lb_firmware_update, "7,ota flash auto force",this)
                         }
                     }
                     .show()

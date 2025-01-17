@@ -453,7 +453,7 @@ class CarData : Serializable {
             car_temp_pem = String.format("%.1f\u00B0C", car_temp_pem_raw)
             car_temp_motor = String.format("%.1f\u00B0C", car_temp_motor_raw)
             car_temp_battery = String.format("%.1f\u00B0C", car_temp_battery_raw)
-            car_temp_ambient = String.format("%.1f\u00B0C", car_temp_ambient_raw)
+            car_temp_ambient = if(car_temp_ambient_raw > 70.0f) car_temp_battery else String.format("%.1f\u00B0C", car_temp_ambient_raw)
             car_temp_charger = String.format("%.1f\u00B0C", car_temp_charger_raw)
             car_temp_cabin = String.format("%.1f\u00B0C", car_temp_cabin_raw)
         }

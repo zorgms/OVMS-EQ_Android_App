@@ -265,7 +265,7 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         findViewById(R.id.tabInfoTextChargeMode).setOnClickListener(this)
         findViewById(R.id.tabInfoImageBatteryChargingOverlay).setOnClickListener(this)
         findViewById(R.id.tabInfoImageBatteryAnimation).setOnClickListener(this)
-        findViewById(R.id.tabInfoImageBatteryOverlay).setOnClickListener(this)
+        findViewById(R.id.tabInfoImageBattery).setOnClickListener(this)
 
         val bar = findViewById(R.id.tabInfoSliderChargerControl) as ReversedSeekBar
         bar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
@@ -1024,7 +1024,6 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         val tabInfoTextChargeMode = findViewById(R.id.tabInfoTextChargeMode) as TextView
         val tabInfoImageBatteryChargingOverlay = findViewById(R.id.tabInfoImageBatteryChargingOverlay) as ImageView
         val tabInfoImageBatteryAnimation = findViewById(R.id.tabInfoImageBatteryAnimation) as ImageView
-        val tabInfoImageBatteryOverlay = findViewById(R.id.tabInfoImageBatteryOverlay)
         val tabInfoImageChargeEtr = findViewById(R.id.tabInfoImageChargeEtr) as ImageView
         val tabInfoTextChargeEtrSuff = findViewById(R.id.tabInfoTextChargeEtrSuff) as TextView
         val tabInfoTextChargeEtrFull = findViewById(R.id.tabInfoTextChargeEtrFull) as TextView
@@ -1039,7 +1038,6 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
             tabInfoTextChargeMode.isClickable = false
             tabInfoImageBatteryChargingOverlay.isClickable = false
             tabInfoImageBatteryAnimation.isClickable = false
-            tabInfoImageBatteryOverlay.isClickable = false
             tabCarImageAC.isClickable = true
             ambientiv.visibility = View.VISIBLE
             ambienttvl.text = getString(R.string.textAMBIENT)
@@ -1070,16 +1068,21 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
             tabInfoTextChargeEtrFull.translationY = "170".toFloat()
         }
 
-        // resize Battery image
+        // resize Battery image blue when Car is on
         val maxWeight = (findViewById(R.id.tabInfoTextSOC) as TextView).layoutParams.width
         val realWeight = Math
             .round(maxWeight * carData.car_soc_raw / 100 * 1.1f)
-        val batt = findViewById(R.id.tabInfoImageBatteryOverlay)
-        batt.layoutParams.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
-        batt.requestLayout()
+        val battblue = findViewById(R.id.tabInfoImageBatteryOverlay_b) as View
+        battblue.layoutParams?.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
+        battblue.requestLayout()
+
+        // resize Battery image green when Car is on
+        val battgreen = findViewById(R.id.tabInfoImageBatteryOverlay_g) as View
+        battgreen.layoutParams?.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
+        battgreen.requestLayout()
 
         // animated charging: Battery image
-        val battc = findViewById(R.id.tabInfoImageBatteryOverlayC)
+        val battc = findViewById(R.id.tabInfoImageBatteryOverlay_t) as View
         battc.layoutParams.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
         battc.requestLayout()
         val animator = ObjectAnimator.ofFloat(battc, "alpha", 0.7F, 0F)
@@ -1089,7 +1092,7 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         animator.start()
 
         // animated charging: charge Battery image
-        val chargeing = findViewById(R.id.tabInfoImageBatteryAnimation)
+        val chargeing = findViewById(R.id.tabInfoImageBatteryAnimation) as View
         chargeing.layoutParams.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
         chargeing.requestLayout()
         val animatorcharge = ObjectAnimator.ofFloat(chargeing, "alpha", 0.4F, 1F)
@@ -1099,12 +1102,14 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         animatorcharge.start()
 
         // switch animation on/off depending on charge power input
-        if ((carData.car_chargeport_open) && (carData.car_charge_power_input_kw_raw > 1.3)) {
-            batt.visibility = View.INVISIBLE
+        if ((carData.car_chargeport_open) && (carData.car_charge_power_input_kw_raw > 1.2)) {
+            battblue.visibility = View.INVISIBLE
+            battgreen.visibility = View.VISIBLE
             battc.visibility = View.VISIBLE
             chargeing.visibility = View.VISIBLE
         }else{
-            batt.visibility = View.VISIBLE
+            battblue.visibility = if (!carData.car_started) View.VISIBLE else View.INVISIBLE
+            battgreen.visibility = if (carData.car_started) View.VISIBLE else View.INVISIBLE
             battc.visibility = View.INVISIBLE
             chargeing.visibility = View.INVISIBLE
         }
