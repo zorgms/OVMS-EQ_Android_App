@@ -1081,6 +1081,11 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         battgreen.layoutParams?.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
         battgreen.requestLayout()
 
+        // resize Battery image red/blue when climate is on
+        val battredblue = findViewById(R.id.tabInfoImageBatteryOverlay_rb) as View
+        battredblue.layoutParams?.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
+        battredblue.requestLayout()
+
         // animated charging: Battery image
         val battc = findViewById(R.id.tabInfoImageBatteryOverlay_t) as View
         battc.layoutParams.width = min(maxWeight.toDouble(), realWeight.toDouble()).toInt()
@@ -1105,11 +1110,13 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         if ((carData.car_chargeport_open) && (carData.car_charge_power_input_kw_raw > 1.2)) {
             battblue.visibility = View.INVISIBLE
             battgreen.visibility = View.VISIBLE
+            battredblue.visibility = View.INVISIBLE
             battc.visibility = View.VISIBLE
             chargeing.visibility = View.VISIBLE
         }else{
-            battblue.visibility = if (!carData.car_started) View.VISIBLE else View.INVISIBLE
+            battblue.visibility = if (!carData.car_started && !carData.car_hvac_on) View.VISIBLE else View.INVISIBLE
             battgreen.visibility = if (carData.car_started) View.VISIBLE else View.INVISIBLE
+            battredblue.visibility = if (!carData.car_started && carData.car_hvac_on) View.VISIBLE else View.INVISIBLE
             battc.visibility = View.INVISIBLE
             chargeing.visibility = View.INVISIBLE
         }

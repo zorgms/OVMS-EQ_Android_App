@@ -791,21 +791,17 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                 val plugin_inst = if (appPrefs.getData("plugin_repo_smarteq_$app_Car_ID") == "on") getString(R.string.lb_options_plugin_deinst) else getString(R.string.lb_options_plugin_inst)
                 val plugin_update = getString(R.string.lb_plugin_update)
                 val plugin_script_reload = getString(R.string.lb_plugin_script_reload)
-                val plugin_1 = if (appPrefs.getData("plugin_1_$app_Car_ID") == "on") getString(R.string.lb_plugin_eq_1_off) else getString(R.string.lb_plugin_eq_1_on)
                 val plugin_2 = if (appPrefs.getData("plugin_2_$app_Car_ID") == "on") getString(R.string.lb_plugin_eq_2_off) else getString(R.string.lb_plugin_eq_2_on)
                 val plugin_3 = if (appPrefs.getData("plugin_3_$app_Car_ID") == "on") getString(R.string.lb_plugin_eq_3_off) else getString(R.string.lb_plugin_eq_3_on)
                 val plugin_4 = if (appPrefs.getData("plugin_4_$app_Car_ID") == "on") getString(R.string.lb_plugin_eq_4_off) else getString(R.string.lb_plugin_eq_4_on)
-                val plugin_5 = if (appPrefs.getData("plugin_5_$app_Car_ID") == "on") getString(R.string.lb_plugin_eq_5_off) else getString(R.string.lb_plugin_eq_5_on)
 
                 var options = arrayOf(
                     "$plugin_inst",
                     "$plugin_update",
                     "$plugin_script_reload",
-                    "$plugin_1",
                     "$plugin_2",
                     "$plugin_3",
-                    "$plugin_4",
-                    "$plugin_5"
+                    "$plugin_4"
                 )
                 var checkedItem = -1 // To store the index of the selected item
                 AlertDialog.Builder(requireActivity())
@@ -834,25 +830,8 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                             2 -> {
                                 sendCommand(R.string.lb_plugin_script_reload, "7,script reload", this)
                             }
-                            // plugin 1 xsq_v2data
-                            3 -> {
-                                if (appPrefs.getData("plugin_1_$app_Car_ID") == "on") {
-                                    appPrefs.saveData("plugin_1_$app_Car_ID", "off")
-                                    sendCommand(R.string.lb_plugin_eq_1_off, "7,plugin disable xsq_v2data", this)
-                                } else {
-                                    //appPrefs.saveData("plugin_1_$app_Car_ID", "on")
-                                    /* disable plugin 1 activation it will replaced // to do
-                                    if (appPrefs.getData("plugin_1_$app_Car_ID") == "off") {
-                                        appPrefs.saveData("plugin_1_$app_Car_ID", "on")
-                                        sendCommand(R.string.lb_plugin_eq_1_on, "7,plugin enable xsq_v2data", this)
-                                    } else {
-                                        appPrefs.saveData("plugin_1_$app_Car_ID", "on")
-                                        sendCommand(R.string.lb_plugin_eq_1_on,"7,plugin install xsq_v2data",this)
-                                    }*/
-                                }
-                            }
                             // plugin 2 scheduled_booster
-                            4 -> {
+                            3 -> {
                                 if (appPrefs.getData("plugin_2_$app_Car_ID") == "on") {
                                     appPrefs.saveData("plugin_2_$app_Car_ID", "off")
                                     sendCommand(R.string.lb_plugin_eq_2_off, "7,plugin disable scheduled_booster", this)
@@ -867,7 +846,7 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                                 }
                             }
                             // plugin 3 gps_onoff
-                            5 -> {
+                            4 -> {
                                 if (appPrefs.getData("plugin_3_$app_Car_ID") == "on") {
                                     appPrefs.saveData("plugin_3_$app_Car_ID", "off")
                                     sendCommand(R.string.lb_plugin_eq_3_off, "7,plugin disable gps_onoff", this)
@@ -882,7 +861,7 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                                 }
                             }
                             // plugin 4 booster_12V
-                            6 -> {
+                            5 -> {
                                 if (appPrefs.getData("plugin_4_$app_Car_ID") == "on") {
                                     appPrefs.saveData("plugin_4_$app_Car_ID", "off")
                                     sendCommand(R.string.lb_plugin_eq_4_off, "7,plugin disable booster_12V", this)
@@ -893,21 +872,6 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                                     } else {
                                         appPrefs.saveData("plugin_4_$app_Car_ID", "on")
                                         sendCommand(R.string.lb_plugin_eq_4_on, "7,plugin install booster_12V", this)
-                                    }
-                                }
-                            }
-                            // plugin 5 modem_lte
-                            7 -> {
-                                if (appPrefs.getData("plugin_5_$app_Car_ID") == "on") {
-                                    appPrefs.saveData("plugin_5_$app_Car_ID", "off")
-                                    sendCommand(R.string.lb_plugin_eq_5_off, "7,plugin disable modem_lte", this)
-                                } else {
-                                    if (appPrefs.getData("plugin_5_$app_Car_ID") == "off") {
-                                        appPrefs.saveData("plugin_5_$app_Car_ID", "on")
-                                        sendCommand(R.string.lb_plugin_eq_5_on, "7,plugin enable modem_lte", this)
-                                    } else {
-                                        appPrefs.saveData("plugin_5_$app_Car_ID", "on")
-                                        sendCommand(R.string.lb_plugin_eq_5_on, "7,plugin install modem_lte", this)
                                     }
                                 }
                             }
