@@ -175,7 +175,8 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         val booster_ac_btn = rootView.findViewById<View>(R.id.tabCarImageAC)
         booster_ac_btn.setOnClickListener {
             if (carData!!.car_type== "SQ") {
-                var options = arrayOf("A/C on", "2x Booster", "3x Booster")
+                val txt = R.string.lb_booster_min
+                var options = arrayOf("5 $txt", "10 $txt", "15 $txt")
                 var checkedItem = 0 // To store the index of the selected item
                 AlertDialog.Builder(requireActivity())
                     .setTitle(R.string.lb_booster)
@@ -1066,9 +1067,9 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
             tabCarImageAC.isClickable = true
             ambientiv.visibility = View.VISIBLE
             ambienttvl.text = getString(R.string.textAMBIENT)
-            ambienttv.text = String.format("%.0f°C", carData.car_temp_ambient_raw)
+            ambienttv.text = carData.car_temp_ambient
             cabintvl.text = getString(R.string.textCAB)
-            cabintv.text = String.format("%.0f°C", carData.car_temp_cabin_raw)
+            cabintv.text = carData.car_temp_cabin
             ambientiv.visibility = View.VISIBLE
             ambienttvl.visibility = View.VISIBLE
             ambienttv.visibility = View.VISIBLE

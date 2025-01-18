@@ -450,12 +450,12 @@ class CarData : Serializable {
                 String.format("%.1f\u00B0F", car_temp_charger_raw * (9.0 / 5.0) + 32.0)
             car_temp_cabin = String.format("%.1f\u00B0F", car_temp_cabin_raw * (9.0 / 5.0) + 32.0)
         } else {
-            car_temp_pem = String.format("%.1f\u00B0C", car_temp_pem_raw)
-            car_temp_motor = String.format("%.1f\u00B0C", car_temp_motor_raw)
-            car_temp_battery = String.format("%.1f\u00B0C", car_temp_battery_raw)
-            car_temp_ambient = if(car_temp_ambient_raw > 70.0f) car_temp_battery else String.format("%.1f\u00B0C", car_temp_ambient_raw)
-            car_temp_charger = String.format("%.1f\u00B0C", car_temp_charger_raw)
-            car_temp_cabin = String.format("%.1f\u00B0C", car_temp_cabin_raw)
+            car_temp_pem = String.format("%.0f\u00B0C", car_temp_pem_raw)
+            car_temp_motor = String.format("%.0f\u00B0C", car_temp_motor_raw)
+            car_temp_battery = String.format("%.0f\u00B0C", car_temp_battery_raw)
+            car_temp_ambient = String.format("%.0f\u00B0C", if(car_temp_ambient_raw > 100.0f) car_temp_battery_raw else car_temp_ambient_raw)
+            car_temp_charger = String.format("%.0f\u00B0C", car_temp_charger_raw)
+            car_temp_cabin = String.format("%.0f\u00B0C", car_temp_cabin_raw)
         }
         if (showTpmsBar) {
             car_tpms_fl_p = String.format("%.1f%s", car_tpms_fl_p_raw / 14.504, "bar")

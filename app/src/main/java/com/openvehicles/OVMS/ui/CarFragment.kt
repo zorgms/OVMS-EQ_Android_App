@@ -1533,8 +1533,8 @@ class CarFragment : BaseFragment(), View.OnClickListener, OnResultCommandListene
                 batterytv.text = ""
                 chargertv.text = ""
             } else {
-                batterytv.text = String.format("%.0f°C", carData.car_temp_battery_raw)
-                chargertv.text = String.format("%.0f°C", carData.car_temp_cabin_raw)
+                batterytv.text = carData.car_temp_battery
+                chargertv.text = carData.car_temp_cabin
                 if (carData.stale_car_temps == DataStale.Stale) {
                     batterytv.setTextColor(-0x7f7f80)
                     chargertv.setTextColor(-0x7f7f80)
