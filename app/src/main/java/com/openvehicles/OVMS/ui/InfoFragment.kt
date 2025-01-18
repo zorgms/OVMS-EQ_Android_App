@@ -175,7 +175,7 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         val booster_ac_btn = rootView.findViewById<View>(R.id.tabCarImageAC)
         booster_ac_btn.setOnClickListener {
             if (carData!!.car_type== "SQ") {
-                val txt = R.string.lb_booster_min
+                val txt = getString(R.string.lb_booster_mins)
                 var options = arrayOf("5 $txt", "10 $txt", "15 $txt")
                 var checkedItem = 0 // To store the index of the selected item
                 AlertDialog.Builder(requireActivity())

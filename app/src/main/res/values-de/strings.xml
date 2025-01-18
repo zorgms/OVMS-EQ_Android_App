@@ -146,6 +146,7 @@
     <string name="lb_booster_off">Booster timer aus</string>
     <string name="lb_booster_hour">Stunde</string>
     <string name="lb_booster_min">Minute</string>
+    <string name="lb_booster_mins">Minuten</string>
     <string name="lb_booster_doubler">doppelt Boostern?</string>">
     <string name="lb_booster_doubler_on">doppelt Boostern an</string>">
     <string name="lb_booster_doubler_off">doppelt Boostern aus</string>">
