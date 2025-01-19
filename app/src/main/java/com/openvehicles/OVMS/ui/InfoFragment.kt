@@ -948,7 +948,7 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
                     tvPowerLoss.visibility = View.VISIBLE
                     if (chargeStateInfo != 0) {
                         val linevoltage = String.format("%.0f%s     ", carData.car_charge_linevoltage_raw, "V")
-                        val current = String.format("     %s%s",carData.car_battery_current_raw, "A") // car_charge_current
+                        val current = String.format("     %s%s",carData.car_charge_current_raw, "A")
                         tvf.text = String.format(
                             getText(chargeStateInfo).toString(),
                             linevoltage,
