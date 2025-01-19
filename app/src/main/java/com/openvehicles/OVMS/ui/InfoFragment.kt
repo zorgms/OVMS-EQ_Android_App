@@ -1135,7 +1135,7 @@ class InfoFragment : BaseFragment(), View.OnClickListener, OnResultCommandListen
         // switch animation on/off depending on charge power input
         if ((carData.car_chargeport_open) && (carData.car_charge_power_input_kw_raw > 1.2)) {
             battblue.visibility = View.INVISIBLE
-            battgreen.visibility = View.VISIBLE
+            battgreen.visibility = View.INVISIBLE
             battredblue.visibility = View.INVISIBLE
             battc.visibility = View.VISIBLE
             chargeing.visibility = View.VISIBLE
